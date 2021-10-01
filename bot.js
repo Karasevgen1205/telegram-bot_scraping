@@ -2,8 +2,6 @@ require('dotenv').config();
 const {Telegraf} = require('telegraf');
 const axios = require('axios');
 const cheerio = require('cheerio');
-const { data } = require('jquery');
-const e = require('express');
 
 const channel = "@ebanoe_IT_for_testing";
 const url = "https://kinogoo.by/";
@@ -19,6 +17,7 @@ bot.hears("hi", (ctx) => {
 bot.command("hi", (ctx) => {
     ctx.reply('Poshol nax!');
 })
+bot.launch();
 
 async function getData(url, db) {
     const response = await axios.get(url)
@@ -42,7 +41,6 @@ async function getData(url, db) {
     });
 }
 
-
 function compare() {
     const newDB = []
     getData(url, newDB);
@@ -58,6 +56,7 @@ function compare() {
 }
 
 let timerId = setInterval(compare, 3000);
+
 
 
 // let timerId = setTimeout(function tick() {
@@ -120,5 +119,3 @@ let timerId = setInterval(compare, 3000);
 //         ctx.reply('Какая-то неожиданная ошибка')
 //     }
 // })
-
-bot.launch();
